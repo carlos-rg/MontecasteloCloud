@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="3161de0f-8911-43a5-850d-d81af7800d05" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/ServicioCloud/Service1/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="e7d516fa-5ad7-422a-aef1-18f2c4962090" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ServicioCloud/Service1/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="42e91037-2a1c-4c4e-bdc3-998d80f7e108" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ServicioCloud/Service1/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="857914fa-8e78-4082-ad0d-5afa666b2b9d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ServicioCloud/Service1/mex" />
+    <MetadataFile FileName="ServicioCloud.xsd" MetadataType="Schema" ID="0848daf1-709e-4f39-aa58-8e1a3dffd705" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ServicioCloud/Service1/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
