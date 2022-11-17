@@ -33,7 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ArchivoDialog = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonLogout = new System.Windows.Forms.Button();
             this.UploadPublic = new System.Windows.Forms.Button();
             this.UploadPrivate = new System.Windows.Forms.Button();
             this.DeletePublic = new System.Windows.Forms.Button();
@@ -80,14 +80,14 @@
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
-            // button1
+            // buttonLogout
             // 
-            this.button1.Image = global::MontecasteloCloudCliente.Properties.Resources.logout1;
-            this.button1.Location = new System.Drawing.Point(958, 24);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(40, 42);
-            this.button1.TabIndex = 9;
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonLogout.Image = global::MontecasteloCloudCliente.Properties.Resources.logout1;
+            this.buttonLogout.Location = new System.Drawing.Point(958, 24);
+            this.buttonLogout.Name = "buttonLogout";
+            this.buttonLogout.Size = new System.Drawing.Size(40, 42);
+            this.buttonLogout.TabIndex = 9;
+            this.buttonLogout.UseVisualStyleBackColor = true;
             // 
             // UploadPublic
             // 
@@ -177,7 +177,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonLogout);
             this.Controls.Add(this.UploadPublic);
             this.Controls.Add(this.UploadPrivate);
             this.Controls.Add(this.label1);
@@ -208,7 +208,7 @@
         private System.Windows.Forms.Button UploadPrivate;
         private System.Windows.Forms.Button UploadPublic;
         private System.Windows.Forms.OpenFileDialog ArchivoDialog;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonLogout;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
