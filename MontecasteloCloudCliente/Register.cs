@@ -25,31 +25,43 @@ namespace MontecasteloCloudCliente
             var Algo = HashAlgorithm.Create("md5");
             var Hash = Algo.ComputeHash(Encoding.UTF8.GetBytes(Password));
             var HashPassword = BitConverter.ToString(Hash);
-            int IfAdmin = 0;
+            int IfAdmin;
             if (Username != String.Empty && Password != String.Empty && checkBoxRegister.Checked)
             {
                 try
                 {
                     using (IDbConnection Conn = new SqlConnection(ConnectionString))
                     {
-                        var Query = $@"INSERT INTO Usuarios (NombreUsuario, Pass, IfAdmin) VALUES (@Username, @Password, @IfAdmin)";
-                        var Insert = Conn.Execute(Query, new { Username = Username, Password = HashPassword, IfAdmin = IfAdmin });
-                        if (Insert != 0)
+                        if (checkBoxAdmin.Checked)
                         {
-                            WebRequest Request = WebRequest.Create("ftp://127.0.0.1:21/" + Username);
-                            Request.Method = WebRequestMethods.Ftp.MakeDirectory;
-                            Request.Credentials = new NetworkCredential("test", "test");
-                            Request.GetResponse();
-                            MessageBox.Show("Se ha creado un nuevo usuario", "Felicidades!");
-                            Login L1 = new Login();
-                            this.Hide();
-                            L1.Show();
+                            IfAdmin = 1;
                         }
                         else
                         {
-                            MessageBox.Show("Se ha producido un error", "Error");
+                            IfAdmin = 0;
                         }
-                        Conn.Close();
+                        var QueryUser = "SELECT * FROM Usuarios WHERE NombreUsuario = '" + Username + "'";
+                        var QueryVal = Conn.QuerySingle<Usuarios>(QueryUser);
+                        if (QueryVal == null) {
+                            var Query = $@"INSERT INTO Usuarios (NombreUsuario, Pass, IfAdmin) VALUES (@Username, @Password, @IfAdmin)";
+                            var Insert = Conn.Execute(Query, new { Username, Password = HashPassword, IfAdmin });
+                            if (Insert != 0)
+                            {
+                                WebRequest Request = WebRequest.Create("ftp://127.0.0.1:21/" + Username);
+                                Request.Method = WebRequestMethods.Ftp.MakeDirectory;
+                                Request.Credentials = new NetworkCredential("test", "test");
+                                Request.GetResponse();
+                                MessageBox.Show("Se ha creado un nuevo usuario", "Felicidades!");
+                                Login L1 = new Login();
+                                this.Hide();
+                                L1.Show();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Se ha producido un error", "Error");
+                            }
+                            Conn.Close();
+                        }
                     }
                 }
                 catch (Exception ex)

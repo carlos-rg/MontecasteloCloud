@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace MontecasteloCloudCliente
 {
@@ -21,6 +22,8 @@ namespace MontecasteloCloudCliente
         private void Archivos_Load(object sender, EventArgs e)
         {
             int IDUsuario = Login.ID;
+            string NombreUsuario = Login.UserName;
+            labelUser.Text = NombreUsuario;
             try
             {
                 using (IDbConnection Conn = new SqlConnection(ConnectionString))
@@ -49,11 +52,12 @@ namespace MontecasteloCloudCliente
         {
             try
             {
+                int IDUsuario = Login.ID;
                 string Username = Login.UserName;
                 string Archivo = listBoxPrivado.SelectedItem.ToString();
                 using (IDbConnection Conn = new SqlConnection(ConnectionString))
                 {
-                    var Query1 = "SELECT * FROM ArchivosPrivados WHERE NombreArchivo = '" + Archivo + "'";
+                    var Query1 = "SELECT * FROM ArchivosPrivados WHERE NombreArchivo = '" + Archivo + "' AND IDUsuario = " + IDUsuario;
                     var Select1 = Conn.QuerySingle<ArchivosPrivados>(Query1);
                     string Ruta = $"{Select1.RutaPrivado}";
                     int Ext = Select1.IDTipoArchivo;
@@ -93,18 +97,52 @@ namespace MontecasteloCloudCliente
 
         private void DeletePrivate_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                int IDUsuario = Login.ID;
+                string Username = Login.UserName;
+                string Archivo = listBoxPrivado.SelectedItem.ToString();
+                using (IDbConnection Conn = new SqlConnection(ConnectionString))
+                {
+                    var Query1 = "SELECT * FROM ArchivosPrivados WHERE NombreArchivo = '" + Archivo + "' AND IDUsuario = " + IDUsuario;
+                    var Select1 = Conn.QuerySingle<ArchivosPrivados>(Query1);
+                    string NombreArchivo = $"{Select1.NombreArchivo}";
+                    string Ruta = $"{Select1.RutaPrivado}";
+                    int Ext = Select1.IDTipoArchivo;
+                    var Query = $@"DELETE FROM ArchivosPrivados WHERE NombreArchivo = @NombreArchivo AND IDUsuario = @IDUsuario";
+                    var Delete = Conn.Execute(Query, new { NombreArchivo, IDUsuario });
+                    if (Delete != 0)
+                    {
+                        WebRequest Request = WebRequest.Create("ftp://127.0.0.1:21/" + Ruta);
+                        Request.Method = WebRequestMethods.Ftp.DeleteFile;
+                        Request.Credentials = new NetworkCredential("test", "test");
+                        Request.GetResponse();
+                        MessageBox.Show("Se ha eliminado el archivo", "Felicidades!");
+                        listBoxPrivado.Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Se ha producido un error", "Error");
+                    }
+                    Conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void DownloadPublic_Click(object sender, EventArgs e)
         {
             try
             {
+                int IDUsuario = Login.ID;
                 string Username = Login.UserName;
                 string Archivo = listBoxPrivado.SelectedItem.ToString();
                 using (IDbConnection Conn = new SqlConnection(ConnectionString))
                 {
-                    var Query1 = "SELECT * FROM ArchivosPublicos WHERE NombreArchivo = '" + Archivo + "'";
+                    var Query1 = "SELECT * FROM ArchivosPublicos WHERE NombreArchivo = '" + Archivo + "' AND IDUsuario = " + IDUsuario;
                     var Select1 = Conn.QuerySingle<ArchivosPublicos>(Query1);
                     string Ruta = $"{Select1.RutaPublico}";
                     int Ext = Select1.IDTipoArchivo;
@@ -147,23 +185,32 @@ namespace MontecasteloCloudCliente
         {
             try
             {
+                int IDUsuario = Login.ID;
                 string Username = Login.UserName;
                 string Archivo = listBoxPrivado.SelectedItem.ToString();
                 using (IDbConnection Conn = new SqlConnection(ConnectionString))
                 {
-                    var Query1 = "SELECT * FROM ArchivosPublicos WHERE NombreArchivo = '" + Archivo + "'";
+                    var Query1 = "SELECT * FROM ArchivosPublicos WHERE NombreArchivo = '" + Archivo + "' AND IDUsuario = " + IDUsuario;
                     var Select1 = Conn.QuerySingle<ArchivosPublicos>(Query1);
+                    string NombreArchivo = $"{Select1.NombreArchivo}";
                     string Ruta = $"{Select1.RutaPublico}";
-                    var Query2 = "DELETE FROM ArchivosPublicos WHERE NombreArchivo = '@Archivo'";
-                    var Insert = Conn.Execute(Query2, new { Archivo });
-                    if (Select1 != null)
+                    int Ext = Select1.IDTipoArchivo;
+                    var Query = $@"DELETE FROM ArchivosPublicos WHERE NombreArchivo = @NombreArchivo AND IDUsuario = @IDUsuario";
+                    var Delete = Conn.Execute(Query, new { NombreArchivo, IDUsuario });
+                    if (Delete != 0)
                     {
-                        FtpWebRequest Request = (FtpWebRequest)WebRequest.Create("ftp://127.0.0.1:21/" + Ruta);
+                        WebRequest Request = WebRequest.Create("ftp://127.0.0.1:21/public" + Ruta);
                         Request.Method = WebRequestMethods.Ftp.DeleteFile;
                         Request.Credentials = new NetworkCredential("test", "test");
                         Request.GetResponse();
-                        MessageBox.Show("Se ha eliminado un archivo", "Felicidades!");
+                        MessageBox.Show("Se ha eliminado el archivo", "Felicidades!");
+                        listBoxPublico.Refresh();
                     }
+                    else
+                    {
+                        MessageBox.Show("Se ha producido un error", "Error");
+                    }
+                    Conn.Close();
                 }
             }
             catch (Exception ex)
@@ -270,6 +317,36 @@ namespace MontecasteloCloudCliente
                 listBoxPublico.Items.Add(Archivo);
                 listBoxPublico.Refresh();
             }
+        }
+
+        private void SearchPrivado_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBoxPrivado.Text))
+            {
+                int index = listBoxPrivado.FindString(textBoxPrivado.Text);
+                if (index != -1)
+                    listBoxPrivado.SetSelected(index, true);
+                else
+                    MessageBox.Show("El archivo no existe...", "Error");
+            }
+        }
+
+        private void SearchPublico_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBoxPublico.Text))
+            {
+                int index = listBoxPublico.FindString(textBoxPrivado.Text);
+                if (index != -1)
+                    listBoxPublico.SetSelected(index, true);
+                else
+                    MessageBox.Show("El archivo no existe...", "Error");
+            }
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            Opciones O1 = new Opciones();
+            O1.Show();
         }
     }
 }

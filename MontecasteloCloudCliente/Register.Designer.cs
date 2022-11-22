@@ -36,6 +36,9 @@
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxRegister = new System.Windows.Forms.CheckBox();
+            this.checkBoxAdmin = new System.Windows.Forms.CheckBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // ButtonRegister
@@ -94,7 +97,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F);
-            this.label1.Location = new System.Drawing.Point(70, 54);
+            this.label1.Location = new System.Drawing.Point(105, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(266, 32);
             this.label1.TabIndex = 9;
@@ -110,11 +113,32 @@
             this.checkBoxRegister.Text = "Acepto registrarme";
             this.checkBoxRegister.UseVisualStyleBackColor = true;
             // 
+            // checkBoxAdmin
+            // 
+            this.checkBoxAdmin.AutoSize = true;
+            this.checkBoxAdmin.Location = new System.Drawing.Point(124, 228);
+            this.checkBoxAdmin.Name = "checkBoxAdmin";
+            this.checkBoxAdmin.Size = new System.Drawing.Size(174, 17);
+            this.checkBoxAdmin.TabIndex = 18;
+            this.checkBoxAdmin.Text = "(Experimental) Quiero ser admin";
+            this.checkBoxAdmin.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::MontecasteloCloudCliente.Properties.Resources.montecasteloicon;
+            this.pictureBox1.Location = new System.Drawing.Point(39, 38);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(60, 62);
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(409, 450);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.checkBoxAdmin);
             this.Controls.Add(this.checkBoxRegister);
             this.Controls.Add(this.ButtonRegister);
             this.Controls.Add(this.ButtonClear);
@@ -125,6 +149,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Register";
             this.Text = "Register";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,5 +165,7 @@
         private System.Windows.Forms.TextBox textBoxUsername;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxRegister;
+        private System.Windows.Forms.CheckBox checkBoxAdmin;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
