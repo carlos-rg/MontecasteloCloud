@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace MontecasteloCloudCliente
 {
@@ -74,7 +73,8 @@ namespace MontecasteloCloudCliente
                                 ftpStream.CopyTo(fileStream);
                             }
                         }
-                        else if (Ext == 2){
+                        else if (Ext == 2)
+                        {
                             using (Stream ftpStream = Request.GetResponse().GetResponseStream())
                             using (Stream fileStream = File.Create(@"D:\" + Archivo + ".rar"))
                             {
