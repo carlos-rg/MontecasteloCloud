@@ -54,9 +54,13 @@ namespace MontecasteloCloudCliente
                 using (IDbConnection Conn = new SqlConnection(ConnectionString))
                 {
                     string NombreUsuario = Login.UserName;
-                    var Query = "DELETE FROM Usuarios WHERE NombreUsuario = '@Username'";
-                    var Delete = Conn.Execute(Query, new { NombreUsuario });
-                    if (Delete != 0)
+                    int IdUsuario = Login.ID;
+                    var Query = "DELETE FROM ArchivosPublicos WHERE IDUsuario = @IDUsuario";
+                    var Query2 = "DELETE FROM Usuarios WHERE NombreUsuario = '@Username'";
+                    var Delete = Conn.Execute(Query, new { IdUsuario });
+                    var Delete2 = Conn.Execute(Query2, new { NombreUsuario });
+
+                    if (Delete2 != 0)
                     {
                         MessageBox.Show("Usuario eliminado correctamente.", "Eliminar usuario");
                         Login L1 = new Login();
@@ -65,7 +69,7 @@ namespace MontecasteloCloudCliente
                     }
                     else
                     {
-                        MessageBox.Show("Se ha producido un error borrando el usuario.", "Error");
+                        MessageBox.Show("Se ha producido un error borrando el usuario. Intenta borrar antes los archivos!", "Error");
                     }
                 }
             }

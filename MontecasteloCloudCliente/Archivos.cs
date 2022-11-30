@@ -118,6 +118,7 @@ namespace MontecasteloCloudCliente
                         Request.Credentials = new NetworkCredential("test", "test");
                         Request.GetResponse();
                         MessageBox.Show("Se ha eliminado el archivo", "Felicidades!");
+                        listBoxPrivado.Items.Remove(Archivo);
                         listBoxPrivado.Refresh();
                     }
                     else
@@ -204,6 +205,7 @@ namespace MontecasteloCloudCliente
                         Request.Credentials = new NetworkCredential("test", "test");
                         Request.GetResponse();
                         MessageBox.Show("Se ha eliminado el archivo", "Felicidades!");
+                        listBoxPrivado.Items.Remove(Archivo);
                         listBoxPublico.Refresh();
                     }
                     else

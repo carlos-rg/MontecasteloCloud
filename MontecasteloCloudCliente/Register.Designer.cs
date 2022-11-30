@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Register));
             this.ButtonRegister = new System.Windows.Forms.Button();
             this.ButtonClear = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -147,8 +148,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxUsername);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Register";
-            this.Text = "Register";
+            this.Text = "Montecastelo Cloud - Register";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

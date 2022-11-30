@@ -191,5 +191,8 @@
   <ItemGroup>
     <None Include="images\red_wavy.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="images\red_lines_background.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,6 +18,7 @@ namespace MontecasteloCloudCliente
         const string ConnectionString = "Initial Catalog=montecastelocloud;Data Source=CARLOS-PC;Integrated Security=SSPI;";
         public static int ID;
         public static string UserName = String.Empty;
+        
 
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
@@ -75,6 +76,11 @@ namespace MontecasteloCloudCliente
             Register R1 = new Register();
             this.Hide();
             R1.Show();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            BackgroundImageLayout = ImageLayout.Stretch;
         }
     }
 }

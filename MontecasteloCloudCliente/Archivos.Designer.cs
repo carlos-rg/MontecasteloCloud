@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Archivos));
             this.listBoxPrivado = new System.Windows.Forms.ListBox();
             this.listBoxPublico = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -253,8 +254,9 @@
             this.Controls.Add(this.DownloadPrivate);
             this.Controls.Add(this.listBoxPublico);
             this.Controls.Add(this.listBoxPrivado);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Archivos";
-            this.Text = "Archivos";
+            this.Text = "Montecastelo Cloud - Archivos";
             this.Load += new System.EventHandler(this.Archivos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
